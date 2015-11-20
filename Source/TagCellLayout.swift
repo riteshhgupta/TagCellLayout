@@ -267,6 +267,7 @@ private extension TagCellLayout {
   func resetLayoutState() {
     layoutInfoList = Array<TagCellLayoutInfo>()
     lastTagPosition = CGPointZero
+    numberOfTagsInCurrentRow = 0
   }
   
 }
