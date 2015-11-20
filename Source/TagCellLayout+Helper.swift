@@ -21,7 +21,7 @@ extension CGFloat {
   }
 }
 
-protocol TagCellLayoutDelegate: NSObjectProtocol {
+public protocol TagCellLayoutDelegate: NSObjectProtocol {
   func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index:Int) -> Float
   func tagCellLayoutTagFixHeight(layout: TagCellLayout) -> Float
 }
@@ -31,7 +31,7 @@ class TagCellLayoutInfo: NSObject {
   var whiteSpace: Float?
 }
 
-enum TagAlignmentType:Int {
+public enum TagAlignmentType:Int {
   case Left
   case Center
   case Right

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TagCellLayout: UICollectionViewLayout {
+public class TagCellLayout: UICollectionViewLayout {
   
   var layoutInfoList = Array<TagCellLayoutInfo>()
   var lastTagPosition = CGPointZero
@@ -23,13 +23,13 @@ class TagCellLayout: UICollectionViewLayout {
   
   //MARK: - Init Methods
   
-  init(tagAlignmentType: TagAlignmentType?, delegate: TagCellLayoutDelegate?) {
+  public init(tagAlignmentType: TagAlignmentType?, delegate: TagCellLayoutDelegate?) {
     super.init()
     self.delegate = delegate
     self.tagAlignmentType = tagAlignmentType
   }
   
-  required init?(coder aDecoder: NSCoder) {
+  required public init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   
@@ -39,7 +39,7 @@ class TagCellLayout: UICollectionViewLayout {
   
   //MARK: - Override Methods
   
-  override func prepareLayout() {
+  override public func prepareLayout() {
     
     // reset inital values
     resetLayoutState()
@@ -56,7 +56,7 @@ class TagCellLayout: UICollectionViewLayout {
     }
   }
   
-  override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+  override public func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
     if layoutInfoList.count > indexPath.row {
       return layoutInfoList[indexPath.row].layoutAttribute
     }
@@ -64,7 +64,7 @@ class TagCellLayout: UICollectionViewLayout {
     return nil
   }
   
-  override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+  override public func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
     if layoutInfoList.count > 0 {
       let visibleLayoutAttributes = layoutInfoList.map{someAttribute($0.layoutAttribute)}.filter {
         CGRectIntersectsRect(rect, $0.frame)
@@ -74,7 +74,7 @@ class TagCellLayout: UICollectionViewLayout {
     return nil
   }
   
-  override func collectionViewContentSize() -> CGSize {
+  override public func collectionViewContentSize() -> CGSize {
     var collectionSize = CGSizeMake(0, 0)
     if let delegate = delegate, collectionView = collectionView where collectionView.numberOfItemsInSection(0) > 0 {
       
