@@ -6,9 +6,9 @@ Pod::Spec.new do |spec|
     'Ritesh Gupta' => 'rg.riteshh@gmail.com'
   }
   spec.license          =  'MIT' 
-  spec.homepage         =  'https://github.com/'
+  spec.homepage         =  'https://github.com/riteshhgupta/TagCellLayout'
   spec.source = {
-    :git => 'your_projects_github_https_git_url',
+    :git => 'git@github.com:riteshhgupta/TagCellLayout.git',
     :branch => 'master'
   }
   spec.source_files =  'Source/*.{swift}'
