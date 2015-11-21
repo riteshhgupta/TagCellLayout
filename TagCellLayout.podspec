@@ -8,9 +8,8 @@ Pod::Spec.new do |spec|
   spec.license          =  'MIT' 
   spec.homepage         =  'https://github.com/riteshhgupta/TagCellLayout'
   spec.source = {
-    :git => 'git@github.com:riteshhgupta/TagCellLayout.git',
-    :branch => 'master',
-    :tag => 0.1
+    :git => 'https://github.com/riteshhgupta/TagCellLayout.git',
+    :tag => '0.1.0'
   }
   spec.ios.deployment_target = "8.0"
   spec.source_files =  'Source/*.{swift}'
