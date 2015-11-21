@@ -15,7 +15,11 @@ use_frameworks!
 
 pod 'TagCellLayout', '~> 0.1'
 ```
+## Screenshots
 
+![Center Alignment](/TagCellLayout/Readme_Resources/tag_cc.png)
+![Left Alignment](/TagCellLayout/Readme_Resources/tag_ll.png)
+![Right Alignment](/TagCellLayout/Readme_Resources/tag_rr.png)
 
 ##Usage
 
