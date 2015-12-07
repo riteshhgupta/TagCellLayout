@@ -22,18 +22,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     defaultSetup()
 
     // THIS IS ALL WHAT IS REQUIRED TO SETUP YOUR TAGS
-    let tagCellLayout = TagCellLayout(delegate: self)
+
+    let tagCellLayout = TagCellLayout(tagAlignmentType: .Center, delegate: self)
     collectionView?.collectionViewLayout = tagCellLayout
   }
   
   //MARK: - TagCellLayout Delegate Methods
   
-  func tagCellLayoutTagFixHeight(layout: TagCellLayout) -> Float {
-    return 54.0
+  func tagCellLayoutTagFixHeight(layout: TagCellLayout) -> CGFloat {
+    return CGFloat(54.0)
   }
   
-  func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index: Int) -> Float {
-    return index%2 == 0 ? 80:120
+  func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index: Int) -> CGFloat {
+    return CGFloat(index%2 == 0 ? 80:120)
   }
   
   //MARK: - Default Methods
