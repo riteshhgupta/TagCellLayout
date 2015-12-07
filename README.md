@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/riteshhgupta/TagCellLayout.svg)](https://travis-ci.org/riteshhgupta/TagCellLayout)
 [![Badge w/ Version](https://cocoapod-badges.herokuapp.com/v/TagCellLayout/badge.png)](https://cocoapods.org/pods/TagCellLayout)
 [![Badge w/ Platform](https://cocoapod-badges.herokuapp.com/p/TagCellLayout/badge.svg)](https://cocoapods.org/pods/TagCellLayout)
-[![License MIT](https://go-shields.herokuapp.com/license-MIT-blue.png)](https://opensource.org/licenses/MIT)
+[![License MIT](http://img.shields.io/:license-mit-blue.svg)](https://opensource.org/licenses/MIT)
 
 ##About
 
@@ -49,9 +49,8 @@ TagCellLayoutDelegate
 ## Delegate Methods
 
 ```
-- func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index:Int) -> Float
-
-- func tagCellLayoutTagFixHeight(layout: TagCellLayout) -> Float
+- func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index:Int) -> CGFloat
+- func tagCellLayoutTagFixHeight(layout: TagCellLayout) -> CGFloat
 ```
 
 ## Architecture
