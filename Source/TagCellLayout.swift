@@ -13,7 +13,7 @@ public class TagCellLayout: UICollectionViewLayout {
   
   var layoutInfoList = Array<TagCellLayoutInfo>()
   var lastTagPosition = CGPointZero
-  var tagAlignmentType: TagAlignmentType?
+  var tagAlignmentType = TagAlignmentType.Left
   
   var numberOfTagsInCurrentRow = 0
   var tagsCount = 0
@@ -23,7 +23,7 @@ public class TagCellLayout: UICollectionViewLayout {
   
   //MARK: - Init Methods
   
-  public init(tagAlignmentType: TagAlignmentType?, delegate: TagCellLayoutDelegate?) {
+  public init(tagAlignmentType: TagAlignmentType = .Left, delegate: TagCellLayoutDelegate?) {
     super.init()
     self.delegate = delegate
     self.tagAlignmentType = tagAlignmentType
@@ -34,7 +34,7 @@ public class TagCellLayout: UICollectionViewLayout {
   }
   
   override convenience init() {
-    self.init(tagAlignmentType: nil, delegate: nil)
+    self.init(delegate: nil)
   }
   
   //MARK: - Override Methods
@@ -202,9 +202,7 @@ private extension TagCellLayout {
   
   func distributionFactor() -> Float {
     var factor = Float(1.0)
-    if let type = tagAlignmentType {
-      factor = type.distributionFactor
-    }
+    factor = tagAlignmentType.distributionFactor
     return factor
   }
   
