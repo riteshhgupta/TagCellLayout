@@ -125,6 +125,16 @@ public class TagCellLayout: UICollectionViewLayout {
 			delegate?.tagCellLayoutTagFixHeight(self) ?? 0
 		)
 	}
+	
+	public class func textWidth(text: String, font: UIFont) -> CGFloat {
+		let padding: CGFloat = 4 // this number is independent of font and is required to compensate the inaccuracy of sizeToFit calculation!
+		let label = UILabel()
+		label.text = text
+		label.font = font
+		label.sizeToFit()
+		let frame = label.frame
+		return (frame.width + padding)
+	}
 }
 
 //MARK: - Private Methods
