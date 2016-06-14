@@ -16,7 +16,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'TagCellLayout', '~> 0.1'
+pod 'TagCellLayout', '~> 0.2'
 ```
 ## Screenshots
 
@@ -26,7 +26,7 @@ pod 'TagCellLayout', '~> 0.1'
 
 ##Usage
 
-- Init Method
+- Init Method:
 
 ```
 import TagCellLayout
@@ -35,18 +35,23 @@ let tagCellLayout = TagCellLayout(tagAlignmentType: .Center, delegate: self)
 collectionView.collectionViewLayout = tagCellLayout
 ```
 
-- Tag Alignment
+- Tag Alignment:
 
 ```tagAlignmentType``` can be Left or Center or Right. If its nil then by default Left alignment will be applied.
 
+- Helper methods:
 
-- Protocol to confirm
+`- func textWidth(text: String, font: UIFont) -> CGFloat`
 
-```
-TagCellLayoutDelegate
-```
+It calculates the width of a tag string.
+
 
 ## Delegate Methods
+- Protocol to conform - `TagCellLayoutDelegate`
+
+
+- Methods
+
 
 ```
 - func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index:Int) -> CGFloat
@@ -54,11 +59,17 @@ TagCellLayoutDelegate
 ```
 
 ## Architecture
-- ```tagCellLayoutTagFixHeight(layout: TagCellLayout)``` is only called once as all tags have one fixed height that will be defined by this method.
+- ```tagCellLayoutTagFixHeight(layout: TagCellLayout)``` 
 
-- ```tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index:Int)``` is called for every tag where you will calculate their width and pass it on to TagCellLayout class for further calculations.
+is only called once as all tags have one fixed height that will be defined by this method.
 
-- Internally number of tags is calculated by ```collectionView.numberOfItemsInSection(0)```
+- ```tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index:Int)``` 
+
+is called for every tag where you will calculate their width and pass it on to TagCellLayout class for further calculations.
+
+- ```collectionView.numberOfItemsInSection(0)```
+
+internally the number of tags is calculated by the above method.
 
 ## Contributing
 
