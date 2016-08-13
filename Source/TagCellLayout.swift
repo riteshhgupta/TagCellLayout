@@ -283,6 +283,7 @@ private extension TagCellLayout {
 	func resetLayoutState() {
 		layoutInfoList = Array<TagCellLayoutInfo>()
 		numberOfTagsInCurrentRow = 0
+		lineNumber = 1
 	}
 	
 }
