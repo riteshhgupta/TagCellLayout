@@ -47,6 +47,7 @@ public class TagCellLayout: UICollectionViewLayout {
 	var tagAlignmentType = TagAlignmentType.Left
 	var numberOfTagsInCurrentRow = 0
 	var currentTagIndex: Int = 0
+	var lineNumber = 1
 	weak var delegate: TagCellLayoutDelegate?
 
 	var currentTagPosition: CGPoint {
@@ -218,7 +219,8 @@ private extension TagCellLayout {
 		let layoutInfo = layoutInfoList[currentTagIndex].layoutAttribute
 		let tagWidth = layoutInfo.frame.size.width
 		if shouldMoveTagToNextRow(tagWidth) {
-			applyWhiteSpace(startingIndex: (currentTagIndex-1))
+			lineNumber += 1
+			applyWhiteSpace(startingIndex: (currentTagIndex - 1))
 		}
 	}
 	
@@ -281,6 +283,7 @@ private extension TagCellLayout {
 	func resetLayoutState() {
 		layoutInfoList = Array<TagCellLayoutInfo>()
 		numberOfTagsInCurrentRow = 0
+		lineNumber = 1
 	}
 	
 }
