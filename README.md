@@ -11,12 +11,14 @@ Its an ui-collection-view LAYOUT class that takes care of all the logic behind m
 
 ##Installation
 To integrate TagCellLayout into your Xcode project using CocoaPods, specify it in your Podfile:
-```
+```ruby
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'TagCellLayout', '~> 0.2'
+target '<Your Target Name>' do
+    pod 'TagCellLayout', '~> 0.2'
+end
 ```
 ## Screenshots
 
@@ -28,7 +30,7 @@ pod 'TagCellLayout', '~> 0.2'
 
 - Init Method:
 
-```
+```swift
 import TagCellLayout
 
 let tagCellLayout = TagCellLayout(tagAlignmentType: .Center, delegate: self)
@@ -41,7 +43,9 @@ collectionView.collectionViewLayout = tagCellLayout
 
 - Helper methods:
 
-`- func textWidth(text: String, font: UIFont) -> CGFloat`
+```swift
+- func textWidth(text: String, font: UIFont) -> CGFloat
+```
 
 It calculates the width of a tag string.
 
@@ -53,7 +57,7 @@ It calculates the width of a tag string.
 - Methods
 
 
-```
+```swift
 - func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index:Int) -> CGFloat
 - func tagCellLayoutTagFixHeight(layout: TagCellLayout) -> CGFloat
 ```
