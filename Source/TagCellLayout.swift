@@ -5,6 +5,7 @@
 //  Created by Ritesh-Gupta on 20/11/15.
 //  Copyright © 2015 Ritesh. All rights reserved.
 //
+//	Swift 2.3
 
 import Foundation
 import UIKit
@@ -121,9 +122,9 @@ public class TagCellLayout: UICollectionViewLayout {
 	}
 	
 	override public func collectionViewContentSize() -> CGSize {
-		if let
-			heightPerLine = delegate?.tagCellLayoutTagFixHeight(self),
-			width = collectionView?.frame.size.width
+		if
+			let heightPerLine = delegate?.tagCellLayoutTagFixHeight(self),
+			let width = collectionView?.frame.size.width
 		{
 			let height = heightPerLine*CGFloat(lineNumber)
 			return CGSize(width: width, height: height)

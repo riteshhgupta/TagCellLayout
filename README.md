@@ -31,6 +31,7 @@ use_frameworks!
 
 pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git', :branch => 'swift2.3'
 ```
+<<<<<<< HEAD
 
 `Swift-3.0`
 
@@ -62,6 +63,8 @@ use_frameworks!
 pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git', :branch => 'swift4'
 ```
 
+=======
+>>>>>>> chore(project): update project to swift-2.3
 ## Screenshots
 
 ![Center Alignment](/TagCellLayout/Readme_Resources/tag_cc.png)
