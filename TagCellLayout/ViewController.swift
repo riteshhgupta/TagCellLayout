@@ -17,23 +17,23 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     // Do any additional setup after loading the view, typically from a nib.
   }
 
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     defaultSetup()
 
     // THIS IS ALL WHAT IS REQUIRED TO SETUP YOUR TAGS
 
-    let tagCellLayout = TagCellLayout(tagAlignmentType: .Center, delegate: self)
+    let tagCellLayout = TagCellLayout(tagAlignmentType: .center, delegate: self)
     collectionView?.collectionViewLayout = tagCellLayout
   }
   
   //MARK: - TagCellLayout Delegate Methods
   
-  func tagCellLayoutTagFixHeight(layout: TagCellLayout) -> CGFloat {
+  func tagCellLayoutTagFixHeight(_ layout: TagCellLayout) -> CGFloat {
     return CGFloat(54.0)
   }
   
-  func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index: Int) -> CGFloat {
+  func tagCellLayoutTagWidth(_ layout: TagCellLayout, atIndex index: Int) -> CGFloat {
     return CGFloat(index%2 == 0 ? 80:120)
   }
   
@@ -46,22 +46,22 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
   func defaultSetup() {
     let nib = UINib(nibName: "TagCollectionViewCell", bundle: nil)
-    collectionView?.registerNib(nib, forCellWithReuseIdentifier: "TagCollectionViewCell")
+    collectionView?.register(nib, forCellWithReuseIdentifier: "TagCollectionViewCell")
   }
   
   //MARK: - UICollectionView Delegate/Datasource Methods
   
-  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let identifier = "TagCollectionViewCell"
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     return cell
   }
   
-  func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+  func numberOfSections(in collectionView: UICollectionView) -> Int {
     return 1
   }
   
-  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return 10
   }
   
