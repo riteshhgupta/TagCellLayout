@@ -5,24 +5,25 @@
 //  Created by Ritesh-Gupta on 20/11/15.
 //  Copyright © 2015 Ritesh. All rights reserved.
 //
+//	Swift 3.0
 
 import Foundation
 import UIKit
 
 public protocol TagCellLayoutDelegate: NSObjectProtocol {
-	func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index:Int) -> CGFloat
-	func tagCellLayoutTagFixHeight(layout: TagCellLayout) -> CGFloat
+	func tagCellLayoutTagWidth(_ layout: TagCellLayout, atIndex index:Int) -> CGFloat
+	func tagCellLayoutTagFixHeight(_ layout: TagCellLayout) -> CGFloat
 }
 
 public enum TagAlignmentType: Int {
-	case Left
-	case Center
-	case Right
+	case left
+	case center
+	case right
 	
 	var distributionFactor: CGFloat {
 		var factor: CGFloat
 		switch self {
-		case .Center:
+		case .center:
 			factor = 2
 		default:
 			factor = 1
@@ -31,7 +32,7 @@ public enum TagAlignmentType: Int {
 	}
 }
 
-public class TagCellLayout: UICollectionViewLayout {
+open class TagCellLayout: UICollectionViewLayout {
 	
 	struct TagCellLayoutInfo {
 		var layoutAttribute: UICollectionViewLayoutAttributes
@@ -44,7 +45,7 @@ public class TagCellLayout: UICollectionViewLayout {
 	}
 	
 	var layoutInfoList = Array<TagCellLayoutInfo>()
-	var tagAlignmentType = TagAlignmentType.Left
+	var tagAlignmentType = TagAlignmentType.left
 	var numberOfTagsInCurrentRow = 0
 	var currentTagIndex: Int = 0
 	var lineNumber = 1
@@ -56,7 +57,7 @@ public class TagCellLayout: UICollectionViewLayout {
 			position.x += info.bounds.width
 			return position
 		}
-		return CGPointZero
+		return CGPoint.zero
 	}
 	
 	var currentTagLayoutInfo: TagCellLayoutInfo? {
@@ -68,7 +69,7 @@ public class TagCellLayout: UICollectionViewLayout {
 	}
 	
 	var tagsCount: Int {
-		return collectionView?.numberOfItemsInSection(0) ?? 0
+		return collectionView?.numberOfItems(inSection: 0) ?? 0
 	}
 	
 	var collectionViewWidth: CGFloat {
@@ -81,7 +82,7 @@ public class TagCellLayout: UICollectionViewLayout {
 	
 	//MARK: - Init Methods
 	
-	public init(tagAlignmentType: TagAlignmentType = .Left, delegate: TagCellLayoutDelegate?) {
+	public init(tagAlignmentType: TagAlignmentType = .left, delegate: TagCellLayoutDelegate?) {
 		super.init()
 		self.delegate = delegate
 		self.tagAlignmentType = tagAlignmentType
@@ -97,33 +98,33 @@ public class TagCellLayout: UICollectionViewLayout {
 	
 	//MARK: - Override Methods
 	
-	override public func prepareLayout() {
+	override open func prepare() {
 		resetLayoutState()
 		setupTagCellLayout()
 	}
 	
-	override public func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
-		if layoutInfoList.count > indexPath.row {
-			return layoutInfoList[indexPath.row].layoutAttribute
+	override open func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+		if layoutInfoList.count > (indexPath as NSIndexPath).row {
+			return layoutInfoList[(indexPath as NSIndexPath).row].layoutAttribute
 		}
 		
 		return nil
 	}
 	
-	override public func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+	override open func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
 		if layoutInfoList.count > 0 {
 			let visibleLayoutAttributes = layoutInfoList
 				.map { $0.layoutAttribute }
-				.filter { CGRectIntersectsRect(rect, $0.frame) }
+				.filter { rect.intersects($0.frame) }
 			return visibleLayoutAttributes
 		}
 		return nil
 	}
 	
-	override public func collectionViewContentSize() -> CGSize {
+	override open var collectionViewContentSize : CGSize {
 		if let
 			heightPerLine = delegate?.tagCellLayoutTagFixHeight(self),
-			width = collectionView?.frame.size.width
+			let width = collectionView?.frame.size.width
 		{
 			let height = heightPerLine*CGFloat(lineNumber)
 			return CGSize(width: width, height: height)
@@ -131,7 +132,7 @@ public class TagCellLayout: UICollectionViewLayout {
 		return CGSize.zero
 	}
 	
-	public class func textWidth(text: String, font: UIFont) -> CGFloat {
+	open class func textWidth(_ text: String, font: UIFont) -> CGFloat {
 		let padding: CGFloat = 4 // this number is independent of font and is required to compensate the inaccuracy of sizeToFit calculation!
 		let label = UILabel()
 		label.text = text
@@ -148,7 +149,7 @@ private extension TagCellLayout {
 	
 	func setupTagCellLayout() {
 		// delegate and collectionview shouldn't be nil
-		if let delegate = delegate where collectionView != nil {
+		if let delegate = delegate , collectionView != nil {
 			// basic layout setup which is independent of TagAlignment type
 			basicLayoutSetup(delegate)
 			
@@ -161,7 +162,7 @@ private extension TagCellLayout {
 		}
 	}
 	
-	func basicLayoutSetup(delegate: TagCellLayoutDelegate) {
+	func basicLayoutSetup(_ delegate: TagCellLayoutDelegate) {
 		// asking the client for a fixed tag height
 		
 		// iterating over every tag and constructing its layout attribute
@@ -187,14 +188,14 @@ private extension TagCellLayout {
 			// calculating tag-size
 			let tagHeight = delegate.tagCellLayoutTagFixHeight(self)
 			let tagWidth = delegate.tagCellLayoutTagWidth(self, atIndex: currentTagIndex)
-			let tagSize = CGSizeMake(tagWidth, tagHeight)
+			let tagSize = CGSize(width: tagWidth, height: tagHeight)
 			
 			let layoutInfo = tagCellLayoutInfo(currentTagIndex, tagSize: tagSize)
 			layoutInfoList.append(layoutInfo)
 		}
 	}
 	
-	func tagCellLayoutInfo(tagIndex: Int, tagSize: CGSize) -> TagCellLayoutInfo {
+	func tagCellLayoutInfo(_ tagIndex: Int, tagSize: CGSize) -> TagCellLayoutInfo {
 		// local data-structure (TagCellLayoutInfo) that has been used in this library to store attribute and white-space info
 		var tagFrame = CGRect(origin: currentTagPosition, size: tagSize)
 		
@@ -208,13 +209,13 @@ private extension TagCellLayout {
 		return info
 	}
 	
-	func shouldMoveTagToNextRow(tagWidth: CGFloat) -> Bool {
+	func shouldMoveTagToNextRow(_ tagWidth: CGFloat) -> Bool {
 		return ((currentTagPosition.x + tagWidth) > collectionViewWidth)
 	}
 	
-	func layoutAttribute(tagIndex: Int, tagFrame: CGRect) -> UICollectionViewLayoutAttributes {
-		let indexPath = NSIndexPath(forItem: tagIndex, inSection: 0)
-		let layoutAttribute = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
+	func layoutAttribute(_ tagIndex: Int, tagFrame: CGRect) -> UICollectionViewLayoutAttributes {
+		let indexPath = IndexPath(item: tagIndex, section: 0)
+		let layoutAttribute = UICollectionViewLayoutAttributes(forCellWith: indexPath)
 		layoutAttribute.frame = tagFrame
 		return layoutAttribute
 	}
@@ -228,7 +229,7 @@ private extension TagCellLayout {
 		}
 	}
 	
-	func applyWhiteSpace(startingIndex startingIndex: Int) {
+	func applyWhiteSpace(startingIndex: Int) {
 		let lastIndex = startingIndex - numberOfTagsInCurrentRow
 		let whiteSpace = calculateWhiteSpace(startingIndex)
 		
@@ -237,21 +238,21 @@ private extension TagCellLayout {
 		}
 	}
 	
-	func calculateWhiteSpace(tagIndex: Int) -> CGFloat {
+	func calculateWhiteSpace(_ tagIndex: Int) -> CGFloat {
 		let tagFrame = tagFrameForIndex(tagIndex)
 		let whiteSpace = collectionViewWidth - (tagFrame.origin.x + tagFrame.size.width)
 		return whiteSpace
 	}
 	
-	func insertWhiteSpace(tagIndex: Int, whiteSpace: CGFloat) {
+	func insertWhiteSpace(_ tagIndex: Int, whiteSpace: CGFloat) {
 		var info = layoutInfoList[tagIndex]
 		let factor = tagAlignmentType.distributionFactor
 		info.whiteSpace = whiteSpace/factor
 		layoutInfoList[tagIndex] = info
 	}
 	
-	func tagFrameForIndex(tagIndex: Int) -> CGRect {
-		let tagFrame =  tagIndex > -1 ? layoutInfoList[tagIndex].layoutAttribute.frame : CGRectZero
+	func tagFrameForIndex(_ tagIndex: Int) -> CGRect {
+		let tagFrame =  tagIndex > -1 ? layoutInfoList[tagIndex].layoutAttribute.frame : CGRect.zero
 		return tagFrame
 	}
 	
@@ -262,8 +263,8 @@ private extension TagCellLayout {
 	}
 	
 	func handleTagAlignment() {
-		if let collectionView = collectionView where tagAlignmentType != .Left {
-			let tagsCount = collectionView.numberOfItemsInSection(0)
+		if let collectionView = collectionView , tagAlignmentType != .left {
+			let tagsCount = collectionView.numberOfItems(inSection: 0)
 			for tagIndex in 0 ..< tagsCount {
 				var tagFrame = layoutInfoList[tagIndex].layoutAttribute.frame
 				let whiteSpace = layoutInfoList[tagIndex].whiteSpace

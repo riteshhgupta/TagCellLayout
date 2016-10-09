@@ -16,7 +16,7 @@ class TagCollectionViewCell: UICollectionViewCell {
   override func awakeFromNib() {
     if let tagView = tagView {
       tagView.layer.cornerRadius = tagView.frame.size.height/2 - 2
-      tagView.layer.borderColor = UIColor.blueColor().CGColor
+      tagView.layer.borderColor = UIColor.blue.cgColor
       tagView.layer.borderWidth = 3.0
     }
   }
