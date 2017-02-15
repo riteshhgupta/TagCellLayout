@@ -171,16 +171,20 @@ private extension TagCellLayout {
 	
 			// creating layout and adding it to the dataSource
 			createLayoutAttributes()
-			
-			// configuring white space info || this is later used for .Right or .Center alignment
-			configureWhiteSpace()
-			
-			// processing info for next tag || setting up the coordinates for next tag
-			configurePositionForNextTag()
-			
-			// handling tha layout for last row separately
-			handleWhiteSpaceForLastRow()
 		}
+        
+        for tagIndex in 0 ..< tagsCount {
+            currentTagIndex = tagIndex
+            
+            // configuring white space info || this is later used for .Right or .Center alignment
+            configureWhiteSpace()
+            
+            // processing info for next tag || setting up the coordinates for next tag
+            configurePositionForNextTag()
+            
+            // handling tha layout for last row separately
+            handleWhiteSpaceForLastRow()
+        }
 	}
 	
 	func createLayoutAttributes() {
@@ -221,10 +225,14 @@ private extension TagCellLayout {
 	}
 	
 	func configureWhiteSpace() {
-		let layoutInfo = layoutInfoList[currentTagIndex].layoutAttribute
+        guard currentTagIndex + 1 < tagsCount else {
+            return
+        }
+        
+		let layoutInfo = layoutInfoList[currentTagIndex+1].layoutAttribute
 		let tagWidth = layoutInfo.frame.size.width
 		if shouldMoveTagToNextRow(tagWidth) {
-			lineNumber += 1
+            lineNumber += 1
 			applyWhiteSpace(startingIndex: (currentTagIndex - 1))
 		}
 	}
