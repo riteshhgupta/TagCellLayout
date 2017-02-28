@@ -13,6 +13,7 @@ import UIKit
 public protocol TagCellLayoutDelegate: NSObjectProtocol {
 	func tagCellLayoutTagWidth(_ layout: TagCellLayout, atIndex index:Int) -> CGFloat
 	func tagCellLayoutTagFixHeight(_ layout: TagCellLayout) -> CGFloat
+	func collectionViewWidth() -> CGFloat
 }
 
 public enum TagAlignmentType: Int {
@@ -210,7 +211,10 @@ private extension TagCellLayout {
 	}
 	
 	func shouldMoveTagToNextRow(_ tagWidth: CGFloat) -> Bool {
-		return ((currentTagPosition.x + tagWidth) > collectionViewWidth)
+		if let delegate = delegate {
+			return ((currentTagPosition.x + tagWidth) > delegate.collectionViewWidth())
+		}
+		return false
 	}
 	
 	func layoutAttribute(_ tagIndex: Int, tagFrame: CGRect) -> UICollectionViewLayoutAttributes {
@@ -242,9 +246,12 @@ private extension TagCellLayout {
 	}
 	
 	func calculateWhiteSpace(_ tagIndex: Int) -> CGFloat {
-		let tagFrame = tagFrameForIndex(tagIndex)
-		let whiteSpace = collectionViewWidth - (tagFrame.origin.x + tagFrame.size.width)
-		return whiteSpace
+		if let delegate = delegate {
+			let tagFrame = tagFrameForIndex(tagIndex)
+			let whiteSpace = delegate.collectionViewWidth() - (tagFrame.origin.x + tagFrame.size.width)
+			return whiteSpace
+		}
+		return 0
 	}
 	
 	func insertWhiteSpace(_ tagIndex: Int, whiteSpace: CGFloat) {
