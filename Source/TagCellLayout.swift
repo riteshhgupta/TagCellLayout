@@ -13,6 +13,7 @@ import UIKit
 public protocol TagCellLayoutDelegate: NSObjectProtocol {
 	func tagCellLayoutTagWidth(_ layout: TagCellLayout, atIndex index:Int) -> CGFloat
 	func tagCellLayoutTagFixHeight(_ layout: TagCellLayout) -> CGFloat
+	func collectionViewWidth() -> CGFloat
 }
 
 public enum TagAlignmentType: Int {
@@ -48,7 +49,6 @@ open class TagCellLayout: UICollectionViewLayout {
 	var tagAlignmentType = TagAlignmentType.left
 	var numberOfTagsInCurrentRow = 0
 	var currentTagIndex: Int = 0
-	var lineNumber = 1
 	weak var delegate: TagCellLayoutDelegate?
 
 	var currentTagPosition: CGPoint {
@@ -122,11 +122,8 @@ open class TagCellLayout: UICollectionViewLayout {
 	}
 	
 	override open var collectionViewContentSize : CGSize {
-		if let
-			heightPerLine = delegate?.tagCellLayoutTagFixHeight(self),
-			let width = collectionView?.frame.size.width
-		{
-			let height = heightPerLine*CGFloat(lineNumber)
+		if let _ = delegate?.tagCellLayoutTagFixHeight(self), let width = collectionView?.frame.size.width, layoutInfoList.count > 0, let lastTag = layoutInfoList.last {
+			let height = lastTag.layoutAttribute.frame.origin.y + lastTag.layoutAttribute.frame.height
 			return CGSize(width: width, height: height)
 		}
 		return CGSize.zero
@@ -171,16 +168,20 @@ private extension TagCellLayout {
 	
 			// creating layout and adding it to the dataSource
 			createLayoutAttributes()
-			
-			// configuring white space info || this is later used for .Right or .Center alignment
-			configureWhiteSpace()
-			
-			// processing info for next tag || setting up the coordinates for next tag
-			configurePositionForNextTag()
-			
-			// handling tha layout for last row separately
-			handleWhiteSpaceForLastRow()
 		}
+        
+        for tagIndex in 0 ..< tagsCount {
+            currentTagIndex = tagIndex
+            
+            // configuring white space info || this is later used for .Right or .Center alignment
+            configureWhiteSpace()
+            
+            // processing info for next tag || setting up the coordinates for next tag
+            configurePositionForNextTag()
+            
+            // handling tha layout for last row separately
+            handleWhiteSpaceForLastRow()
+        }
 	}
 	
 	func createLayoutAttributes() {
@@ -210,7 +211,10 @@ private extension TagCellLayout {
 	}
 	
 	func shouldMoveTagToNextRow(_ tagWidth: CGFloat) -> Bool {
-		return ((currentTagPosition.x + tagWidth) > collectionViewWidth)
+		if let delegate = delegate {
+			return ((currentTagPosition.x + tagWidth) > delegate.collectionViewWidth())
+		}
+		return false
 	}
 	
 	func layoutAttribute(_ tagIndex: Int, tagFrame: CGRect) -> UICollectionViewLayoutAttributes {
@@ -221,10 +225,13 @@ private extension TagCellLayout {
 	}
 	
 	func configureWhiteSpace() {
-		let layoutInfo = layoutInfoList[currentTagIndex].layoutAttribute
+        guard currentTagIndex + 1 < tagsCount else {
+            return
+        }
+        
+		let layoutInfo = layoutInfoList[currentTagIndex+1].layoutAttribute
 		let tagWidth = layoutInfo.frame.size.width
 		if shouldMoveTagToNextRow(tagWidth) {
-			lineNumber += 1
 			applyWhiteSpace(startingIndex: (currentTagIndex - 1))
 		}
 	}
@@ -239,9 +246,12 @@ private extension TagCellLayout {
 	}
 	
 	func calculateWhiteSpace(_ tagIndex: Int) -> CGFloat {
-		let tagFrame = tagFrameForIndex(tagIndex)
-		let whiteSpace = collectionViewWidth - (tagFrame.origin.x + tagFrame.size.width)
-		return whiteSpace
+		if let delegate = delegate {
+			let tagFrame = tagFrameForIndex(tagIndex)
+			let whiteSpace = delegate.collectionViewWidth() - (tagFrame.origin.x + tagFrame.size.width)
+			return whiteSpace
+		}
+		return 0
 	}
 	
 	func insertWhiteSpace(_ tagIndex: Int, whiteSpace: CGFloat) {
@@ -288,7 +298,6 @@ private extension TagCellLayout {
 	func resetLayoutState() {
 		layoutInfoList = Array<TagCellLayoutInfo>()
 		numberOfTagsInCurrentRow = 0
-		lineNumber = 1
 	}
 	
 }
