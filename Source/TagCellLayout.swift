@@ -10,12 +10,12 @@
 import Foundation
 import UIKit
 
-public protocol TagCellLayoutDelegate: NSObjectProtocol {
+@objc public protocol TagCellLayoutDelegate: NSObjectProtocol {
 	func tagCellLayoutTagWidth(_ layout: TagCellLayout, atIndex index:Int) -> CGFloat
 	func tagCellLayoutTagFixHeight(_ layout: TagCellLayout) -> CGFloat
 }
 
-public enum TagAlignmentType: Int {
+@objc public enum TagAlignmentType: Int {
 	case left
 	case center
 	case right
@@ -32,7 +32,7 @@ public enum TagAlignmentType: Int {
 	}
 }
 
-open class TagCellLayout: UICollectionViewLayout {
+@objc open class TagCellLayout: UICollectionViewLayout {
 	
 	struct TagCellLayoutInfo {
 		var layoutAttribute: UICollectionViewLayoutAttributes
