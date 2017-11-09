@@ -17,7 +17,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     // Do any additional setup after loading the view, typically from a nib.
   }
 
-  override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     defaultSetup()
 
@@ -46,14 +46,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
   func defaultSetup() {
     let nib = UINib(nibName: "TagCollectionViewCell", bundle: nil)
-    collectionView?.registerNib(nib, forCellWithReuseIdentifier: "TagCollectionViewCell")
+    collectionView?.register(nib, forCellWithReuseIdentifier: "TagCollectionViewCell")
   }
   
   //MARK: - UICollectionView Delegate/Datasource Methods
   
-  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let identifier = "TagCollectionViewCell"
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     return cell
   }
   
@@ -61,7 +61,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     return 1
   }
   
-  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return 10
   }
   
