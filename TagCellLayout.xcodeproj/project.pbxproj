@@ -279,6 +279,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Ritesh.TagCellLayout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ff255666-24e2-4500-b9ea-19ca6b2df949";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -293,6 +294,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Ritesh.TagCellLayout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ff255666-24e2-4500-b9ea-19ca6b2df949";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

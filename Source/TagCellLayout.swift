@@ -56,7 +56,7 @@ public class TagCellLayout: UICollectionViewLayout {
 			position.x += info.bounds.width
 			return position
 		}
-		return CGPointZero
+		return .zero
 	}
 	
 	var currentTagLayoutInfo: TagCellLayoutInfo? {
@@ -68,7 +68,7 @@ public class TagCellLayout: UICollectionViewLayout {
 	}
 	
 	var tagsCount: Int {
-		return collectionView?.numberOfItemsInSection(0) ?? 0
+        return collectionView?.numberOfItems(inSection: 0) ?? 0
 	}
 	
 	var collectionViewWidth: CGFloat {
@@ -97,39 +97,38 @@ public class TagCellLayout: UICollectionViewLayout {
 	
 	//MARK: - Override Methods
 	
-	override public func prepareLayout() {
+    override public func prepare() {
 		resetLayoutState()
 		setupTagCellLayout()
 	}
-	
-	override public func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
-		if layoutInfoList.count > indexPath.row {
-			return layoutInfoList[indexPath.row].layoutAttribute
-		}
-		
-		return nil
-	}
-	
-	override public func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    public override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        if layoutInfoList.count > indexPath.row {
+            return layoutInfoList[indexPath.row].layoutAttribute
+        }
+        
+        return nil
+    }
+    
+    override public func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
 		if layoutInfoList.count > 0 {
 			let visibleLayoutAttributes = layoutInfoList
 				.map { $0.layoutAttribute }
-				.filter { CGRectIntersectsRect(rect, $0.frame) }
+                .filter { rect.intersects($0.frame) }
 			return visibleLayoutAttributes
 		}
 		return nil
 	}
 	
-	override public func collectionViewContentSize() -> CGSize {
-		if let
-			heightPerLine = delegate?.tagCellLayoutTagFixHeight(self),
-			width = collectionView?.frame.size.width
-		{
-			let height = heightPerLine*CGFloat(lineNumber)
-			return CGSize(width: width, height: height)
-		}
-		return CGSize.zero
-	}
+    override public var collectionViewContentSize: CGSize {
+        if let
+            heightPerLine = delegate?.tagCellLayoutTagFixHeight(layout: self),
+            let width = collectionView?.frame.size.width
+        {
+            let height = heightPerLine*CGFloat(lineNumber)
+            return CGSize(width: width, height: height)
+        }
+        return CGSize.zero
+    }
 	
 	public class func textWidth(text: String, font: UIFont) -> CGFloat {
 		let padding: CGFloat = 4 // this number is independent of font and is required to compensate the inaccuracy of sizeToFit calculation!
@@ -148,9 +147,9 @@ private extension TagCellLayout {
 	
 	func setupTagCellLayout() {
 		// delegate and collectionview shouldn't be nil
-		if let delegate = delegate where collectionView != nil {
+        if let delegate = delegate , let _ = collectionView {
 			// basic layout setup which is independent of TagAlignment type
-			basicLayoutSetup(delegate)
+            basicLayoutSetup(delegate: delegate)
 			
 			// handle if TagAlignment is other than Left
 			handleTagAlignment()
@@ -185,11 +184,11 @@ private extension TagCellLayout {
 	func createLayoutAttributes() {
 		if let delegate = delegate {
 			// calculating tag-size
-			let tagHeight = delegate.tagCellLayoutTagFixHeight(self)
-			let tagWidth = delegate.tagCellLayoutTagWidth(self, atIndex: currentTagIndex)
-			let tagSize = CGSizeMake(tagWidth, tagHeight)
+            let tagHeight = delegate.tagCellLayoutTagFixHeight(layout: self)
+            let tagWidth = delegate.tagCellLayoutTagWidth(layout: self, atIndex: currentTagIndex)
+			let tagSize = CGSize(width: tagWidth, height: tagHeight)
 			
-			let layoutInfo = tagCellLayoutInfo(currentTagIndex, tagSize: tagSize)
+            let layoutInfo = tagCellLayoutInfo(tagIndex: currentTagIndex, tagSize: tagSize)
 			layoutInfoList.append(layoutInfo)
 		}
 	}
@@ -199,11 +198,11 @@ private extension TagCellLayout {
 		var tagFrame = CGRect(origin: currentTagPosition, size: tagSize)
 		
 		// if next tag goes out of screen then move it to next row
-		if shouldMoveTagToNextRow(tagSize.width) {
+        if shouldMoveTagToNextRow(tagWidth: tagSize.width) {
 			tagFrame.origin.x = 0
 			tagFrame.origin.y += tagSize.height
 		}
-		let attribute = layoutAttribute(tagIndex, tagFrame: tagFrame)
+        let attribute = layoutAttribute(tagIndex: tagIndex, tagFrame: tagFrame)
 		let info = TagCellLayoutInfo(layoutAttribute: attribute)
 		return info
 	}
@@ -213,8 +212,8 @@ private extension TagCellLayout {
 	}
 	
 	func layoutAttribute(tagIndex: Int, tagFrame: CGRect) -> UICollectionViewLayoutAttributes {
-		let indexPath = NSIndexPath(forItem: tagIndex, inSection: 0)
-		let layoutAttribute = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
+		let indexPath = IndexPath(item: tagIndex, section: 0)
+        let layoutAttribute = UICollectionViewLayoutAttributes(forCellWith: indexPath)
 		layoutAttribute.frame = tagFrame
 		return layoutAttribute
 	}
@@ -222,23 +221,23 @@ private extension TagCellLayout {
 	func configureWhiteSpace() {
 		let layoutInfo = layoutInfoList[currentTagIndex].layoutAttribute
 		let tagWidth = layoutInfo.frame.size.width
-		if shouldMoveTagToNextRow(tagWidth) {
+        if shouldMoveTagToNextRow(tagWidth: tagWidth) {
 			lineNumber += 1
 			applyWhiteSpace(startingIndex: (currentTagIndex - 1))
 		}
 	}
 	
-	func applyWhiteSpace(startingIndex startingIndex: Int) {
+    func applyWhiteSpace(startingIndex: Int) {
 		let lastIndex = startingIndex - numberOfTagsInCurrentRow
-		let whiteSpace = calculateWhiteSpace(startingIndex)
+        let whiteSpace = calculateWhiteSpace(tagIndex: startingIndex)
 		
 		for tagIndex in (lastIndex+1) ..< (startingIndex+1) {
-			insertWhiteSpace(tagIndex, whiteSpace: whiteSpace)
+            insertWhiteSpace(tagIndex: tagIndex, whiteSpace: whiteSpace)
 		}
 	}
 	
 	func calculateWhiteSpace(tagIndex: Int) -> CGFloat {
-		let tagFrame = tagFrameForIndex(tagIndex)
+        let tagFrame = tagFrameForIndex(tagIndex: tagIndex)
 		let whiteSpace = collectionViewWidth - (tagFrame.origin.x + tagFrame.size.width)
 		return whiteSpace
 	}
@@ -251,28 +250,30 @@ private extension TagCellLayout {
 	}
 	
 	func tagFrameForIndex(tagIndex: Int) -> CGRect {
-		let tagFrame =  tagIndex > -1 ? layoutInfoList[tagIndex].layoutAttribute.frame : CGRectZero
+		let tagFrame =  tagIndex > -1 ? layoutInfoList[tagIndex].layoutAttribute.frame : .zero
 		return tagFrame
 	}
 	
 	func configurePositionForNextTag() {
 		let layoutInfo = layoutInfoList[currentTagIndex].layoutAttribute
-		let moveTag = shouldMoveTagToNextRow(layoutInfo.frame.size.width)
+        let moveTag = shouldMoveTagToNextRow(tagWidth: layoutInfo.frame.size.width)
 		numberOfTagsInCurrentRow = moveTag ? 1 : (numberOfTagsInCurrentRow + 1)
 	}
-	
-	func handleTagAlignment() {
-		if let collectionView = collectionView where tagAlignmentType != .Left {
-			let tagsCount = collectionView.numberOfItemsInSection(0)
-			for tagIndex in 0 ..< tagsCount {
-				var tagFrame = layoutInfoList[tagIndex].layoutAttribute.frame
-				let whiteSpace = layoutInfoList[tagIndex].whiteSpace
-				tagFrame.origin.x += whiteSpace
-				let tagAttribute = layoutAttribute(tagIndex, tagFrame: tagFrame)
-				layoutInfoList[tagIndex].layoutAttribute = tagAttribute
-			}
-		}
-	}
+    
+    func handleTagAlignment() {
+        if let collectionView = collectionView {
+            if tagAlignmentType != .Left {
+                let tagsCount = collectionView.numberOfItems(inSection: 0)
+                for tagIndex in 0 ..< tagsCount {
+                    var tagFrame = layoutInfoList[tagIndex].layoutAttribute.frame
+                    let whiteSpace = layoutInfoList[tagIndex].whiteSpace
+                    tagFrame.origin.x += whiteSpace
+                    let tagAttribute = layoutAttribute(tagIndex: tagIndex, tagFrame: tagFrame)
+                    layoutInfoList[tagIndex].layoutAttribute = tagAttribute
+                }
+            }
+        }
+    }
 	
 	func handleWhiteSpaceForLastRow() {
 		if isLastRow {
