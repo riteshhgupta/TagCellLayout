@@ -11,7 +11,8 @@ Its an ui-collection-view LAYOUT class that takes care of all the logic behind m
 
 ## Installation
 To integrate TagCellLayout into your Xcode project using CocoaPods, specify it in your Podfile:
-`If you are using Swift-2.2`
+
+`Swift-2.2`
 
 ```
 source 'https://github.com/CocoaPods/Specs.git'
@@ -21,7 +22,7 @@ use_frameworks!
 pod 'TagCellLayout', '~> 0.3'
 ```
 
-`If you are using Swift-2.3`
+`Swift-2.3`
 
 ```
 source 'https://github.com/CocoaPods/Specs.git'
@@ -31,7 +32,7 @@ use_frameworks!
 pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git', :branch => 'swift2.3'
 ```
 
-`If you are using Swift-3.0`
+`Swift-3.0`
 
 ```
 source 'https://github.com/CocoaPods/Specs.git'
