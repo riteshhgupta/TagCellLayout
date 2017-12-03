@@ -41,6 +41,27 @@ use_frameworks!
 
 pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git', :branch => 'swift3.0'
 ```
+
+`Swift-3.2`
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git', :branch => 'swift3.2'
+```
+
+`Swift-4`
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git', :branch => 'swift4'
+```
+
 ## Screenshots
 
 ![Center Alignment](/TagCellLayout/Readme_Resources/tag_cc.png)
