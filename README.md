@@ -1,15 +1,15 @@
-#TagCellLayout
+# TagCellLayout
 
 [![Build Status](https://travis-ci.org/riteshhgupta/TagCellLayout.svg)](https://travis-ci.org/riteshhgupta/TagCellLayout)
 [![Badge w/ Version](https://cocoapod-badges.herokuapp.com/v/TagCellLayout/badge.png)](https://cocoapods.org/pods/TagCellLayout)
 [![Badge w/ Platform](https://cocoapod-badges.herokuapp.com/p/TagCellLayout/badge.svg)](https://cocoapods.org/pods/TagCellLayout)
 [![License MIT](http://img.shields.io/:license-mit-blue.svg)](https://opensource.org/licenses/MIT)
 
-##About
+## About
 
 Its an ui-collection-view LAYOUT class that takes care of all the logic behind making tags like layout using UICollectionView. It also allows you to adjust the alignment of your layout i.e Left || Centre || Right. Now you just have to take care of your tag view and nothing else. 
 
-##Installation
+## Installation
 To integrate TagCellLayout into your Xcode project using CocoaPods, specify it in your Podfile:
 `If you are using Swift-2.2`
 
@@ -46,7 +46,7 @@ pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git'
 ![Left Alignment](/TagCellLayout/Readme_Resources/tag_ll.png)
 ![Right Alignment](/TagCellLayout/Readme_Resources/tag_rr.png)
 
-##Usage
+## Usage
 
 - Init Method:
 
