@@ -14,7 +14,7 @@ To integrate TagCellLayout into your Xcode project using CocoaPods, specify it i
 
 `Swift-2.2`
 
-```
+```ruby
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
@@ -24,7 +24,7 @@ pod 'TagCellLayout', '~> 0.3'
 
 `Swift-2.3`
 
-```
+```ruby
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
@@ -34,7 +34,7 @@ pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git'
 
 `Swift-3.0`
 
-```
+```ruby
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
@@ -51,7 +51,7 @@ pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git'
 
 - Init Method:
 
-```
+```swift
 import TagCellLayout
 
 let tagCellLayout = TagCellLayout(tagAlignmentType: .Center, delegate: self)
@@ -76,7 +76,7 @@ It calculates the width of a tag string.
 - Methods
 
 
-```
+```swift
 - func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index:Int) -> CGFloat
 - func tagCellLayoutTagFixHeight(layout: TagCellLayout) -> CGFloat
 ```
