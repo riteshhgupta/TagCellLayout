@@ -1,18 +1,40 @@
-#TagCellLayout (Swift-3.0)
+# TagCellLayout
 
 [![Build Status](https://travis-ci.org/riteshhgupta/TagCellLayout.svg)](https://travis-ci.org/riteshhgupta/TagCellLayout)
 [![Badge w/ Version](https://cocoapod-badges.herokuapp.com/v/TagCellLayout/badge.png)](https://cocoapods.org/pods/TagCellLayout)
 [![Badge w/ Platform](https://cocoapod-badges.herokuapp.com/p/TagCellLayout/badge.svg)](https://cocoapods.org/pods/TagCellLayout)
 [![License MIT](http://img.shields.io/:license-mit-blue.svg)](https://opensource.org/licenses/MIT)
 
-##About
+## About
 
 Its an ui-collection-view LAYOUT class that takes care of all the logic behind making tags like layout using UICollectionView. It also allows you to adjust the alignment of your layout i.e Left || Centre || Right. Now you just have to take care of your tag view and nothing else. 
 
-##Installation
+## Installation
 To integrate TagCellLayout into your Xcode project using CocoaPods, specify it in your Podfile:
 
+`Swift-2.2`
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'TagCellLayout', '~> 0.3'
 ```
+
+`Swift-2.3`
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git', :branch => 'swift2.3'
+```
+
+`Swift-3.0`
+
+```ruby
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
@@ -25,11 +47,11 @@ pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git'
 ![Left Alignment](/TagCellLayout/Readme_Resources/tag_ll.png)
 ![Right Alignment](/TagCellLayout/Readme_Resources/tag_rr.png)
 
-##Usage
+## Usage
 
 - Init Method:
 
-```
+```swift
 import TagCellLayout
 
 let tagCellLayout = TagCellLayout(tagAlignmentType: .Center, delegate: self)
@@ -54,7 +76,7 @@ It calculates the width of a tag string.
 - Methods
 
 
-```
+```swift
 - func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index:Int) -> CGFloat
 - func tagCellLayoutTagFixHeight(layout: TagCellLayout) -> CGFloat
 ```
