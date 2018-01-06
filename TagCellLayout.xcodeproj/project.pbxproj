@@ -7,18 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D9228F720009CE000CD120C /* TagCellLayoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9228F620009CE000CD120C /* TagCellLayoutDelegate.swift */; };
+		3D9228F920009D0900CD120C /* LayoutAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9228F820009D0900CD120C /* LayoutAlignment.swift */; };
+		3D9228FB2000A32C00CD120C /* LayoutInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9228FA2000A32C00CD120C /* LayoutInfo.swift */; };
 		3DF12F161BFF4107001B6902 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF12F151BFF4107001B6902 /* AppDelegate.swift */; };
 		3DF12F181BFF4107001B6902 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF12F171BFF4107001B6902 /* ViewController.swift */; };
 		3DF12F1B1BFF4107001B6902 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF12F191BFF4107001B6902 /* Main.storyboard */; };
 		3DF12F1D1BFF4107001B6902 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DF12F1C1BFF4107001B6902 /* Assets.xcassets */; };
 		3DF12F201BFF4107001B6902 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF12F1E1BFF4107001B6902 /* LaunchScreen.storyboard */; };
 		3DF12F281BFF4372001B6902 /* TagCellLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF12F271BFF4372001B6902 /* TagCellLayout.swift */; };
-		3DF12F2B1BFF43AF001B6902 /* TagCellLayout+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF12F2A1BFF43AF001B6902 /* TagCellLayout+Helper.swift */; };
 		3DF12F2D1BFF45EC001B6902 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF12F2C1BFF45EB001B6902 /* TagCollectionViewCell.swift */; };
 		3DF12F2F1BFF461E001B6902 /* TagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DF12F2E1BFF461E001B6902 /* TagCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D9228F620009CE000CD120C /* TagCellLayoutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagCellLayoutDelegate.swift; path = Source/TagCellLayoutDelegate.swift; sourceTree = SOURCE_ROOT; };
+		3D9228F820009D0900CD120C /* LayoutAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LayoutAlignment.swift; path = Source/LayoutAlignment.swift; sourceTree = SOURCE_ROOT; };
+		3D9228FA2000A32C00CD120C /* LayoutInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LayoutInfo.swift; path = Source/LayoutInfo.swift; sourceTree = SOURCE_ROOT; };
 		3DF12F121BFF4107001B6902 /* TagCellLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TagCellLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF12F151BFF4107001B6902 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DF12F171BFF4107001B6902 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -27,7 +32,6 @@
 		3DF12F1F1BFF4107001B6902 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DF12F211BFF4107001B6902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DF12F271BFF4372001B6902 /* TagCellLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagCellLayout.swift; path = Source/TagCellLayout.swift; sourceTree = SOURCE_ROOT; };
-		3DF12F2A1BFF43AF001B6902 /* TagCellLayout+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "TagCellLayout+Helper.swift"; path = "Source/TagCellLayout+Helper.swift"; sourceTree = SOURCE_ROOT; };
 		3DF12F2C1BFF45EB001B6902 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		3DF12F2E1BFF461E001B6902 /* TagCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TagCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,7 +83,9 @@
 			isa = PBXGroup;
 			children = (
 				3DF12F271BFF4372001B6902 /* TagCellLayout.swift */,
-				3DF12F2A1BFF43AF001B6902 /* TagCellLayout+Helper.swift */,
+				3D9228F620009CE000CD120C /* TagCellLayoutDelegate.swift */,
+				3D9228F820009D0900CD120C /* LayoutAlignment.swift */,
+				3D9228FA2000A32C00CD120C /* LayoutInfo.swift */,
 			);
 			name = Source;
 			path = TagCellLayout;
@@ -159,10 +165,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D9228F920009D0900CD120C /* LayoutAlignment.swift in Sources */,
 				3DF12F181BFF4107001B6902 /* ViewController.swift in Sources */,
+				3D9228FB2000A32C00CD120C /* LayoutInfo.swift in Sources */,
+				3D9228F720009CE000CD120C /* TagCellLayoutDelegate.swift in Sources */,
 				3DF12F161BFF4107001B6902 /* AppDelegate.swift in Sources */,
 				3DF12F2D1BFF45EC001B6902 /* TagCollectionViewCell.swift in Sources */,
-				3DF12F2B1BFF43AF001B6902 /* TagCellLayout+Helper.swift in Sources */,
 				3DF12F281BFF4372001B6902 /* TagCellLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
