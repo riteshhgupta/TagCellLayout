@@ -62,7 +62,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'TagCellLayout', '~> 1.0'
+pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git'
 ```
 
 `Swift-3.2`

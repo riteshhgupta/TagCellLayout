@@ -58,7 +58,9 @@ public class TagCellLayout: UICollectionViewLayout {
 	
 	override public var collectionViewContentSize: CGSize {
 		let width = collectionViewWidth
-		let height = layoutInfoList.reduce(0, { $0 + $1.layoutAttribute.frame.height })
+		let height = layoutInfoList
+			.filter { $0.isFirstElementInARow }
+			.reduce(0, { $0 + $1.layoutAttribute.frame.height })
 		return CGSize(width: width, height: height)
 	}
 }
@@ -137,16 +139,19 @@ private extension TagCellLayout {
 	
 	func tagCellLayoutInfo(tagIndex: Int, tagSize: CGSize) -> LayoutInfo {
 		// local data-structure (TagCellLayoutInfo) that has been used in this library to store attribute and white-space info
+		var isFirstElementInARow = tagIndex == 0
 		var tagFrame = currentTagFrame
 		tagFrame.size = tagSize
 		
 		// if next tag goes out of screen then move it to next row
 		if shouldMoveTagToNextRow(tagWidth: tagSize.width) {
-			tagFrame.origin.x = 0
+			tagFrame.origin.x = 0.0
 			tagFrame.origin.y += currentTagFrame.height
+			isFirstElementInARow = true
 		}
 		let attribute = layoutAttribute(tagIndex: tagIndex, tagFrame: tagFrame)
-		let info = LayoutInfo(layoutAttribute: attribute)
+		var info = LayoutInfo(layoutAttribute: attribute)
+		info.isFirstElementInARow = isFirstElementInARow
 		return info
 	}
 	
