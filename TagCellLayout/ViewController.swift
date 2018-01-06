@@ -23,7 +23,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     // THIS IS ALL WHAT IS REQUIRED TO SETUP YOUR TAGS
 
-    let tagCellLayout = TagCellLayout(tagAlignmentType: .Center, delegate: self)
+    let tagCellLayout = TagCellLayout(tagAlignmentType: .center, delegate: self)
     collectionView?.collectionViewLayout = tagCellLayout
   }
   

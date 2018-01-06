@@ -15,14 +15,14 @@ public protocol TagCellLayoutDelegate: NSObjectProtocol {
 }
 
 public enum TagAlignmentType: Int {
-	case Left
-	case Center
-	case Right
+	case left
+	case center
+	case right
 	
 	var distributionFactor: CGFloat {
 		var factor: CGFloat
 		switch self {
-		case .Center:
+		case .center:
 			factor = 2
 		default:
 			factor = 1
@@ -44,7 +44,7 @@ public class TagCellLayout: UICollectionViewLayout {
 	}
 	
 	var layoutInfoList = Array<TagCellLayoutInfo>()
-	var tagAlignmentType = TagAlignmentType.Left
+	var tagAlignmentType: TagAlignmentType = .left
 	var numberOfTagsInCurrentRow = 0
 	var currentTagIndex: Int = 0
 	var lineNumber = 1
@@ -81,7 +81,7 @@ public class TagCellLayout: UICollectionViewLayout {
 	
 	//MARK: - Init Methods
 	
-	public init(tagAlignmentType: TagAlignmentType = .Left, delegate: TagCellLayoutDelegate?) {
+	public init(tagAlignmentType: TagAlignmentType = .left, delegate: TagCellLayoutDelegate?) {
 		super.init()
 		self.delegate = delegate
 		self.tagAlignmentType = tagAlignmentType
@@ -262,7 +262,7 @@ private extension TagCellLayout {
     
     func handleTagAlignment() {
         if let collectionView = collectionView {
-            if tagAlignmentType != .Left {
+            if tagAlignmentType != .left {
                 let tagsCount = collectionView.numberOfItems(inSection: 0)
                 for tagIndex in 0 ..< tagsCount {
                     var tagFrame = layoutInfoList[tagIndex].layoutAttribute.frame
