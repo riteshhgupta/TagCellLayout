@@ -8,9 +8,19 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, TagCellLayoutDelegate {
-	
+class ViewController: UIViewController {
+
 	@IBOutlet weak var collectionView: UICollectionView?
+	
+	var longString = "start ––– abdmas ldmals kf lsdfkaldskf;alk/fl adafKAdl;faf flkjdl;fa;dl fka;ds kf;ds f;ldskflkdsl;f fjslfjsdlfjsdl;fjd abdmas ––– end"
+	
+	var oneLineHeight: CGFloat {
+		return 54.0
+	}
+	
+	var longTagIndex: Int {
+		return 1
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -27,33 +37,26 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 		collectionView?.collectionViewLayout = tagCellLayout
 	}
 	
-	//MARK: - TagCellLayout Delegate Methods
-	
-	func tagCellLayoutTagFixHeight(layout: TagCellLayout) -> CGFloat {
-		return CGFloat(54.0)
-	}
-	
-	func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index: Int) -> CGFloat {
-		return CGFloat(index%2 == 0 ? 80:120)
-	}
-	
 	//MARK: - Default Methods
-	
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
 	
 	func defaultSetup() {
 		let nib = UINib(nibName: "TagCollectionViewCell", bundle: nil)
 		collectionView?.register(nib, forCellWithReuseIdentifier: "TagCollectionViewCell")
 	}
+}
+
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 	
 	//MARK: - UICollectionView Delegate/Datasource Methods
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let identifier = "TagCollectionViewCell"
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! TagCollectionViewCell
+		if indexPath.row == longTagIndex || indexPath.row == (longTagIndex + 3) {
+			cell.configure(with: longString)
+		} else {
+			cell.configure(with: "Tags")
+		}
 		return cell
 	}
 	
@@ -66,3 +69,31 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 	}
 }
 
+extension ViewController: TagCellLayoutDelegate {
+	
+	func tagCellLayoutTagSize(layout: TagCellLayout, atIndex index: Int) -> CGSize {
+		if index == longTagIndex || index == (longTagIndex + 3) {
+			var s = textSize(text: longString, font: UIFont.systemFont(ofSize: 17.0), collectionView: collectionView!)
+			s.height += 8.0
+			return s
+		} else {
+			let width = CGFloat(index % 2 == 0 ? 80 : 120)
+			return CGSize(width: width, height: oneLineHeight)
+		}
+	}	
+}
+
+extension ViewController {
+	
+	func textSize(text: String, font: UIFont, collectionView: UICollectionView) -> CGSize {
+		var f = collectionView.bounds
+		f.size.height = 9999.0
+		let label = UILabel()
+		label.numberOfLines = 0
+		label.text = text
+		label.font = font
+		var s = label.sizeThatFits(f.size)
+		s.height = max(oneLineHeight, s.height)
+		return s
+	}
+}

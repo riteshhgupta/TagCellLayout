@@ -20,5 +20,8 @@ class TagCollectionViewCell: UICollectionViewCell {
       tagView.layer.borderWidth = 3.0
     }
   }
-  
+	
+	func configure(with text: String) {
+		tagView?.text = text
+	}
 }

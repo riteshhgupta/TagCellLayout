@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13526" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,8 +18,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="142" height="58"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tags" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTE-Bs-m9s">
-                        <rect key="frame" x="2" y="10" width="138" height="38"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tags" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTE-Bs-m9s">
+                        <rect key="frame" x="0.0" y="0.0" width="142" height="58"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -28,16 +28,16 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="XTE-Bs-m9s" secondAttribute="trailing" constant="2" id="MeS-8d-ODJ"/>
-                <constraint firstAttribute="bottom" secondItem="XTE-Bs-m9s" secondAttribute="bottom" constant="10" id="Tag-Ll-ceU"/>
-                <constraint firstItem="XTE-Bs-m9s" firstAttribute="leading" secondItem="cD4-WG-whh" secondAttribute="leading" constant="2" id="Unv-40-Kzg"/>
-                <constraint firstItem="XTE-Bs-m9s" firstAttribute="top" secondItem="cD4-WG-whh" secondAttribute="top" constant="10" id="Xxc-hC-N18"/>
+                <constraint firstAttribute="trailing" secondItem="XTE-Bs-m9s" secondAttribute="trailing" id="MeS-8d-ODJ"/>
+                <constraint firstAttribute="bottom" secondItem="XTE-Bs-m9s" secondAttribute="bottom" id="Tag-Ll-ceU"/>
+                <constraint firstItem="XTE-Bs-m9s" firstAttribute="leading" secondItem="cD4-WG-whh" secondAttribute="leading" id="Unv-40-Kzg"/>
+                <constraint firstItem="XTE-Bs-m9s" firstAttribute="top" secondItem="cD4-WG-whh" secondAttribute="top" id="Xxc-hC-N18"/>
             </constraints>
             <size key="customSize" width="142" height="58"/>
             <connections>
                 <outlet property="tagView" destination="XTE-Bs-m9s" id="qw7-yC-9sO"/>
             </connections>
-            <point key="canvasLocation" x="284" y="230"/>
+            <point key="canvasLocation" x="-51" y="68"/>
         </collectionViewCell>
     </objects>
 </document>
