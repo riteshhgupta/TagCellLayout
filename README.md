@@ -7,60 +7,7 @@
 
 ## About
 
-Its an ui-collection-view LAYOUT class that takes care of all the logic behind making tags like layout using UICollectionView. It also allows you to adjust the alignment of your layout i.e Left || Centre || Right. Now you just have to take care of your tag view and nothing else. 
-
-## Installation
-To integrate TagCellLayout into your Xcode project using CocoaPods, specify it in your Podfile:
-
-`Swift-2.2`
-
-```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
-use_frameworks!
-
-pod 'TagCellLayout', '~> 0.3'
-```
-
-`Swift-2.3`
-
-```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
-use_frameworks!
-
-pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git', :branch => 'swift2.3'
-```
-
-`Swift-3.0`
-
-```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
-use_frameworks!
-
-pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git', :branch => 'swift3.0'
-```
-
-`Swift-3.2`
-
-```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
-use_frameworks!
-
-pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git', :branch => 'swift3.2'
-```
-
-`Swift-4`
-
-```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
-use_frameworks!
-
-pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git', :branch => 'swift4'
-```
+Its an ui-collection-view LAYOUT class that takes care of all the logic behind making tags like layout using UICollectionView. It also allows you to adjust the alignment of your layout i.e Left || Centre || Right. Now you just have to take care of your tag view and nothing else. Aaaand it also supports **multi-line** tags 🚀
 
 ## Screenshots
 
@@ -75,19 +22,13 @@ pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git'
 ```swift
 import TagCellLayout
 
-let tagCellLayout = TagCellLayout(tagAlignmentType: .Center, delegate: self)
+let tagCellLayout = TagCellLayout(alignment: .center, delegate: self)
 collectionView.collectionViewLayout = tagCellLayout
 ```
 
 - Tag Alignment:
 
-```tagAlignmentType``` can be Left or Center or Right. If its nil then by default Left alignment will be applied.
-
-- Helper methods:
-
-`- func textWidth(text: String, font: UIFont) -> CGFloat`
-
-It calculates the width of a tag string.
+```alignment``` can be Left or Center or Right. If its nil then by default Left alignment will be applied.
 
 
 ## Delegate Methods
@@ -98,22 +39,71 @@ It calculates the width of a tag string.
 
 
 ```swift
-- func tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index:Int) -> CGFloat
-- func tagCellLayoutTagFixHeight(layout: TagCellLayout) -> CGFloat
+- 	func tagCellLayoutTagSize(layout: TagCellLayout, atIndex index:Int) -> CGSize
 ```
 
 ## Architecture
-- ```tagCellLayoutTagFixHeight(layout: TagCellLayout)``` 
 
-is only called once as all tags have one fixed height that will be defined by this method.
+- ```func tagCellLayoutTagSize(layout: TagCellLayout, atIndex index:Int) -> CGSize``` 
 
-- ```tagCellLayoutTagWidth(layout: TagCellLayout, atIndex index:Int)``` 
-
-is called for every tag where you will calculate their width and pass it on to TagCellLayout class for further calculations.
+is called for every tag where you will calculate their size and pass it on to TagCellLayout class for further calculations.
 
 - ```collectionView.numberOfItemsInSection(0)```
 
 internally the number of tags is calculated by the above method.
+
+## Installation
+To integrate TagCellLayout into your Xcode project using CocoaPods, specify it in your Podfile:
+
+`Swift-4.0`
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'TagCellLayout', '~> 1.0'
+```
+
+`Swift-3.2`
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git', :branch => 'swift3.2'
+```
+
+`Swift-3.0`
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git', :branch => 'swift3.0'
+```
+
+`Swift-2.3`
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'TagCellLayout', :git => 'https://github.com/riteshhgupta/TagCellLayout.git', :branch => 'swift2.3'
+```
+
+`Swift-2.2`
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'TagCellLayout', '~> 0.3'
+```
 
 ## Contributing
 

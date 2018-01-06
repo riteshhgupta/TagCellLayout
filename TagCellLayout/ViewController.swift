@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
 	@IBOutlet weak var collectionView: UICollectionView?
 	
-	var longString = "start ––– abdmas ldmals kf lsdfkaldskf;alk/fl adafKAdl;faf flkjdl;fa;dl fka;ds kf;ds f;ldskflkdsl;f fjslfjsdlfjsdl;fjd abdmas ––– end"
+	var longString = "start ––– Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ––– end"
 	
 	var oneLineHeight: CGFloat {
 		return 54.0
