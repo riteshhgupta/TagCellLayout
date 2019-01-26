@@ -16,7 +16,6 @@ public class TagCellLayout: UICollectionViewLayout {
 	var layoutInfoList: [LayoutInfo] = []
 	var numberOfTagsInCurrentRow = 0
 	var currentTagIndex: Int = 0
-
 	
 	weak var delegate: TagCellLayoutDelegate?
 	
@@ -72,7 +71,7 @@ private extension TagCellLayout {
 	var currentTagFrame: CGRect {
 		guard let info = currentTagLayoutInfo?.layoutAttribute else { return .zero }
 		var frame = info.frame
-		frame.origin.x += info.bounds.width
+		frame.origin.x += info.bounds.width + (delegate?.tagCellLayoutInteritemHorizontalSpacing(layout: self) ?? 0.0)
 		return frame
 	}
 	
@@ -146,7 +145,8 @@ private extension TagCellLayout {
 		// if next tag goes out of screen then move it to next row
 		if shouldMoveTagToNextRow(tagWidth: tagSize.width) {
 			tagFrame.origin.x = 0.0
-			tagFrame.origin.y += currentTagFrame.height
+			tagFrame.origin.y += currentTagFrame.height +
+                (delegate?.tagCellLayoutInteritemVerticalSpacing(layout: self) ?? 0.0)
 			isFirstElementInARow = true
 		}
 		let attribute = layoutAttribute(tagIndex: tagIndex, tagFrame: tagFrame)

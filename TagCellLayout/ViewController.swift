@@ -24,6 +24,8 @@ class ViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        collectionView?.allowsSelection = true
+        collectionView?.allowsMultipleSelection = true
 		// Do any additional setup after loading the view, typically from a nib.
 	}
 	
@@ -33,7 +35,8 @@ class ViewController: UIViewController {
 		
 		// THIS IS ALL WHAT IS REQUIRED TO SETUP YOUR TAGS
 		
-		let tagCellLayout = TagCellLayout(alignment: .center, delegate: self)
+		let tagCellLayout = TagCellLayout(alignment: .left, delegate: self)
+        tagCellLayout.delegate = self
 		collectionView?.collectionViewLayout = tagCellLayout
 	}
 	
@@ -70,7 +73,14 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 }
 
 extension ViewController: TagCellLayoutDelegate {
-	
+    func tagCellLayoutInteritemHorizontalSpacing(layout: TagCellLayout) -> CGFloat {
+        return 10.0
+    }
+
+    func tagCellLayoutInteritemVerticalSpacing(layout: TagCellLayout) -> CGFloat {
+        return 10.0
+    }
+
 	func tagCellLayoutTagSize(layout: TagCellLayout, atIndex index: Int) -> CGSize {
 		if index == longTagIndex || index == (longTagIndex + 3) {
 			var s = textSize(text: longString, font: UIFont.systemFont(ofSize: 17.0), collectionView: collectionView!)
