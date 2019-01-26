@@ -18,8 +18,15 @@ class TagCollectionViewCell: UICollectionViewCell {
       tagView.layer.cornerRadius = tagView.frame.size.height/2 - 2
         tagView.layer.borderColor = UIColor.blue.cgColor
       tagView.layer.borderWidth = 3.0
+        tagView.layer.masksToBounds = true
     }
   }
+
+    override var isSelected: Bool {
+        didSet {
+            tagView?.backgroundColor = isSelected ? .blue : .clear
+        }
+    }
 	
 	func configure(with text: String) {
 		tagView?.text = text
