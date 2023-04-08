@@ -43,7 +43,8 @@ public class TagCellLayout: UICollectionViewLayout {
 		resetLayoutState()
 		setupTagCellLayout()
 	}
-	public override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+	
+	override public func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
 		guard layoutInfoList.count > indexPath.row else { return nil }
 		return layoutInfoList[indexPath.row].layoutAttribute
 	}
